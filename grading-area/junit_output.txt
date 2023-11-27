@@ -1,0 +1,18 @@
+JUnit version 4.13.2
+.E
+Time: 0.928
+There was 1 failure:
+1) testMergeRightEnd(TestListExamples)
+org.junit.runners.model.TestTimedOutException: test timed out after 500 milliseconds
+	at java.base@11.0.18/java.util.Arrays.copyOf(Arrays.java:3720)
+	at java.base@11.0.18/java.util.Arrays.copyOf(Arrays.java:3689)
+	at java.base@11.0.18/java.util.ArrayList.grow(ArrayList.java:238)
+	at java.base@11.0.18/java.util.ArrayList.grow(ArrayList.java:243)
+	at java.base@11.0.18/java.util.ArrayList.add(ArrayList.java:486)
+	at java.base@11.0.18/java.util.ArrayList.add(ArrayList.java:499)
+	at app//ListExamples.merge(ListExamples.java:42)
+	at app//TestListExamples.testMergeRightEnd(TestListExamples.java:17)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+

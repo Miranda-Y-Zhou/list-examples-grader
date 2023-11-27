@@ -39,22 +39,36 @@ echo "All java files are copied into the grading-area directory"
 
 # Complie all the java files
 
+# Change working directory into grading area
+
 cd grading-area
 
 javac -cp $CPATH *.java &> "javac_output.txt"
 
 # Check the exit status of the last command (javac)
-if [ ! $? -eq 0 ]; then
+if [ $? -ne 0 ]; then
     echo "Compilation failed:"
     grep "error" javac_output.txt
-    exit 2
+    exit 1
 else
     echo "Compilation successful."
 fi
 
 # Run JUnit Tests
 
-java -cp $CPATH org.junit.runner.JUnitCore TestListExamples
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples &> "junit_output.txt"
+
+tests_run=$(grep "Tests run" junit_output.txt | awk '{print $3}')
+failures=$(grep "Tests run" junit_output.txt | awk '{print $5}')
+
+if [ $? -ne 0 ]; then
+    grep "Tests run" junit_output.txt
+    echo "Test not passed"
+    exit 1
+else
+    echo "All test passed."
+    
+fi
 
 cd ..
 
