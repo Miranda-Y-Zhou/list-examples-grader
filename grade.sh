@@ -58,22 +58,27 @@ fi
 
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples &> "junit_output.txt"
 
-tests_run=$(grep "Tests run" junit_output.txt | awk '{print $3}')
-failures=$(grep "Tests run" junit_output.txt | awk '{print $5}')
-
-if [ $? -ne 0 ]; then
-    grep "Tests run" junit_output.txt
-    echo "Test not passed"
-    exit 1
-else
+if [ $? -eq 0 ]; then
     echo "All test passed."
-    
+    echo "Score: 100%"
+    exit 0
 fi
+
+tests_run=$(grep -o 'run: [0-9]*' junit_output.txt | grep -o '[0-9]*')
+
+
+failures=$(grep -o 'Failures: [0-9]*' junit_output.txt | grep -o '[0-9]*')
+
+
+correct=$((tests_run-failures))
+
+# Calculate grade
+
+echo "Test run:" $tests_run "failed:" $failures "correct:" $correct
+
+echo "Score:" $((correct/tests_run))"%"
+
+# Back to original directory
 
 cd ..
 
-# Draw a picture/take notes on the directory structure that's set up after
-# getting to this point
-
-# Then, add here code to compile and run, and do any post-processing of the
-# tests
