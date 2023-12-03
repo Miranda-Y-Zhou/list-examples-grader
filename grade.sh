@@ -37,11 +37,11 @@ cp "Server.java" "grading-area"
 
 echo "All java files are copied into the grading-area directory"
 
-# Complie all the java files
-
 # Change working directory into grading area
 
 cd grading-area
+
+# Complie all the java files
 
 javac -cp $CPATH *.java &> "javac_output.txt"
 
