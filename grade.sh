@@ -58,11 +58,6 @@ fi
 
 java -cp $CPATH org.junit.runner.JUnitCore TestListExamples &> "junit_output.txt"
 
-if [ $? -eq 0 ]; then
-    echo "All test passed."
-    echo "Score: 100%"
-    exit 0
-fi
 
 tests_run=$(grep -o 'run: [0-9]*' junit_output.txt | grep -o '[0-9]*')
 
@@ -73,8 +68,6 @@ failures=$(grep -o 'Failures: [0-9]*' junit_output.txt | grep -o '[0-9]*')
 correct=$((tests_run-failures))
 
 # Calculate grade
-
-echo "Test run:" $tests_run "failed:" $failures "correct:" $correct
 
 echo "Score:" $((correct/tests_run))"%"
 
