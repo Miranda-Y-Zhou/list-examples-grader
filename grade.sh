@@ -69,6 +69,8 @@ correct=$((tests_run-failures))
 
 # Calculate grade
 
+echo "Test run:" $tests_run "failed:" $failures "correct:" $correct
+
 echo "Score:" $((correct/tests_run))"%"
 
 # Back to original directory
